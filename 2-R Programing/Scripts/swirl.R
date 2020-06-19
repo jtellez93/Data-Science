@@ -11,6 +11,7 @@ install_from_swirl("R Programming")
 swirl()
 
 
+### Semana 1 ####
 ### swirl Lesson 1: Basic Building Blocks ####
 
 x <- 5 + 7
@@ -81,6 +82,160 @@ seq(5, 10, length = 30) # length es el numero de incrementos en el intervalo
 
 my_seq <- seq(5, 10, length=30)
 length(my_seq)
+
+1:length(my_seq)
+seq(along.with = my_seq )
+seq_along(my_seq)
+
+rep(0, times = 40) # Repite un argumento el numero de veces deseado con times
+rep(c(1, 2, 3), times = 10)
+rep(c(0, 1, 2), times = 10)
+
+rep(c(0, 1, 2), each = 10) # repite cada uno el numero de veces indicado
+
+
+
+### swirl Lesson 4: Vectors ####
+
+num_vect <- c(0.5, 55, -10, 6)
+tf <- num_vect < 1
+tf
+
+num_vect >= 6
+
+my_char <- c("My", "name", "is")
+my_char
+
+paste(my_char, collapse = " ") # concatena argumentos, los une con lo que se indique en collapse
+
+my_name <- c(my_char, "Julian")
+my_name
+paste(my_name, collapse = " ")
+
+paste("Hello", "world!", sep = " ")
+
+paste(1:3, c("X", "Y", "Z"), sep = "") # concatena 2 vectores
+
+
+paste(LETTERS, 1:4, sep = "-")
+
+
+### swirl Lesson 5: Missing Values ####
+
+x <- c(44, NA, 5, NA)
+x * 3
+
+y <- rnorm(1000)
+z <- rep(NA, 1000)
+
+my_data <- sample(c(y, z), 100) # toma una muestra de los elementos indicados
+my_na <- is.na(my_data)
+my_na
+
+my_data == "NA"
+sum(my_na)
+my_data
+
+0/0 # NAN
+Inf - Inf # NAN
+
+
+
+### swirl Lesson 6: Subsetting Vectors ####
+
+x
+x[1:10]
+x[is.na(x)]
+
+y <- x[!is.na(x)]
+y
+y[y > 0]
+
+x[x > 0]
+x[!is.na(x) & x > 0]
+
+x[c(3, 5, 7)] # mostrar valores en esa posicion
+x[0]
+x[3000]
+
+x[c(-2, -10)] # excluir valores
+x[-c(2, 10)]
+
+vect <- c(foo = 11, bar = 2, norf = NA) # vector con normbres 
+names(vect)
+
+vect2<- c(11, 2, NA)
+names(vect2) <- c("foo", "bar", "norf") # asigna nombre a elementos del vector
+
+
+identical(vect, vect2) # valida si son iguales
+
+vect["bar"]
+vect[c("foo", "bar")]
+
+
+### swirl Lesson 7: Matrices and Data ####
+
+my_vector <- 1:20
+my_vector
+
+dim(my_vector)
+length(my_vector)
+
+dim(my_vector) <- c(4, 5) # asigna dimension 4, 5 al vector (matriz)
+dim(my_vector)
+
+attributes(my_vector) # atributoso del objeto
+
+my_vector
+class(my_vector)
+
+my_matrix <- my_vector
+?matrix
+
+my_matrix2 <- matrix(1:20, nrow = 4, ncol = 5) # crea una matriz
+identical(my_matrix, my_matrix2)
+
+patients <- c("Bill", "Gina", "Kelly", "Sean")
+cbind(patients, my_matrix) # combina objetos por filas o columnas
+
+
+my_data <- data.frame(patients, my_matrix)
+my_data
+
+class(my_data)
+
+cnames <- c("patient", "age", "weight", "bp", "rating", "test") # vector de nombres
+colnames(my_data)
+
+colnames(my_data) <- cnames # cambiar nombres de encabezado a un dataframe
+my_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
