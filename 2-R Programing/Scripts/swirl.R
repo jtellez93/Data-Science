@@ -215,41 +215,171 @@ my_data
 
 
 ### Semana 2 ####
-### swirl Lesson 8:  ####
+### swirl Lesson 8: Logic ####
+
+TRUE == TRUE
+(FALSE == TRUE) == FALSE
+6 == 7
+6 < 7
+10 <= 10
+1
+4
+5 != 7
+!5 == 7
+2
+4
+
+# El operador & es equivalente a interseccion (y)
+FALSE & FALSE 
+TRUE & c(TRUE, FALSE, FALSE) # evalua cada elemento del vector
+TRUE && c(TRUE, FALSE, FALSE) # evalua solo el primero
+
+# El operador | es equivalente a union (o)
+TRUE | c(TRUE, FALSE, FALSE) # evalua cada elemento del vector
+TRUE || c(TRUE, FALSE, FALSE) # evalua solo el primero
+
+5 > 8 || 6 != 8 && 4 > 3.9
+3
+
+isTRUE(6 > 4)
+4
+
+identical('twins', 'twins') # evalua si son identicos
+4
+
+xor(5 == 6, !FALSE) # funcion (o) exclusivo, (TRUE, TRUE) = FALSE, (TRUE, FALSE) = TRUE
+1
+
+ints <- sample(10)
+ints
+ints > 5
+
+which(ints > 7) # toma un vector y devuelve los indices que cumplen una condicion dada
+2
+
+any() # retorna TRUE si uno de los elementos del vector es TRUE
+all() # retorna TRUE si todos los elementos del vector son TRUE
+
+any(ints < 0)
+all(ints > 0)
+2
+
+
+### swirl Lesson 9: Functions ####
+
+Sys.Date()
+mean(c(2, 4, 5))
+
+boring_function <- function(x) {
+        x
+}
+
+boring_function('My first function!')
+boring_function
+
+
+my_mean <- function(my_vector) {
+        x <- sum(my_vector)/length(my_vector)
+        x
+}
+
+my_mean(c(4, 5, 10))
+
+
+remainder <- function(num = 2, divisor = 2) {
+        num %% divisor
+}
+
+remainder(5)
+remainder(11, 5)
+remainder(divisor = 11, num = 5)
+remainder(4, div = 2)
+
+args(remainder)
+
+
+evaluate <- function(func, dat){
+        func(dat)
+}
+
+evaluate(sd, c(1.4, 3.6, 7.9, 8.8))
+
+evaluate(function(x){x+1}, 6)
+
+evaluate(function(x){x[1]}, c(8, 4, 0))
+
+evaluate(function(x){x[length(x)]}, c(8, 4, 0))
+
+?paste
+paste("Programming", "is", "fun!")
+
+
+telegram <- function(...){
+        paste("START", ..., "STOP")
+}
+
+telegram("Hola", "mundo")
 
 
 
+mad_libs <- function(...){
+        # Do your argument unpacking here!
+        args <- list(...)
+        # Don't modify any code below this comment.
+        # Notice the variables you'll need to create in order for the code below to
+        # be functional!
+        place <- args[["place"]]
+        adjective <- args[["adjective"]]
+        noun <- args[["noun"]]
+        
+        paste("News from", place, "today where", adjective, "students took to the streets in protest of the new", noun, "being installed on campus.")
+}
+
+mad_libs("cali", "bueno", "Julian")
+
+
+"%p%" <- function(a, b){ # Remember to add arguments!
+        paste(a, b)
+}
+
+"I"%p%"love"%p%"R!"
 
 
 
+### swirl Lesson 10: Dates and Times ####
 
+d1 <- Sys.Date() # fecha del sistema
+class(d1)  # clase de un objeto
+unclass(d1) # muestra como luce internamente un objeto
+d1
 
+d2 <- as.Date("1969-01-01")
+unclass(d2)
 
+t1 <- Sys.time() # fecha y hora del sistema
+t1
+class(t1) # POSIXct y POSIXt son lasa dos formas de representar la informacion en R
+# por default R muestra el sistema POSIXct
+unclass(t1)
 
+t2 <- as.POSIXlt(Sys.time()) # tipo POSIXt, contiene mas informacion
+t2
+class(t2)
+unclass(t2)
+str(unclass(t2)) # vista mas compacta que unclass
+t2$min
 
+weekdays(d1) # muestra el dia de la semana de cualquier fecha u objeto formato fecha
+months(t1) # muestra el mes de cualquier fecha u objeto formato fecha
+quarters(t2) # muestra trimestre de cualquier fecha u objeto formato fecha
 
+t3 <- "October 17, 1986 08:24"
+t4 <- strptime(t3, "%B %d, %Y %H:%M") # convierte vectores de carecteres en POSIXlt
+t4
+class(t4)
 
+Sys.time() > t1
+Sys.time() - t1
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+difftime(Sys.time(), t1, units = 'days') # muestra la diferencia entre fechas, en formato especificado
 
