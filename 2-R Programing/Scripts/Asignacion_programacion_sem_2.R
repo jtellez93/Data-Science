@@ -1,4 +1,3 @@
-library(tibble)
 old.dir <- getwd()
 
 setwd("Asignaciones de programacion")
@@ -66,7 +65,8 @@ pollutantmean("specdata", "nitrate", 23)
 1.280833
 
 
-
+setwd("Asignaciones de programacion")
+file.create("pollutantmean.R")
 
 ### Parte 2 ####
 
@@ -141,6 +141,161 @@ complete("specdata", 30:25)
 complete("specdata", 3)
 ##   id nobs
 ## 1  3  243
+
+setwd("Asignaciones de programacion")
+file.create("complete.R")
+
+
+
+### Parte 3 ####
+
+corr <- function(directory, threshold = 0){
+  
+    old.dir <- getwd()
+    setwd("D:/Documents/GitHub/Data-Science/2-R Programing")
+  
+    # creo un vector con los nombres de los monitores
+    archivos <- NULL; id <- 1:332
+    for (i in id){
+      if(i <= 9){
+        archivos[i] <- paste("00", i, sep = "")
+      } else if(i > 9 && i <= 99){
+        archivos[i] <- paste("0", i, sep = "")
+      }
+      else{
+        archivos[i] <- i
+      }
+    }
+
+    # data frame con el nombre de archivo y numero de casos completos
+    lecturas <- NULL; total <- NULL;
+    for (i in id){
+      ruta <- paste("Data/", directory, "/", archivos[i], ".csv", sep = "")
+      lecturas[i] <- list(read.csv(ruta))
+    
+      x <- lecturas[[i]][,c(2,3)]
+      x <- x[!is.na(x$sulfate), ]
+      good <- x[!is.na(x$nitrate), ]
+      total[i] <- nrow(good)
+    
+      total <- total[!is.na(total)]
+    }
+  
+    completas <- data.frame(archivos, total)
+    nombres <- c("Archivo", "nobs")
+    names(completas) <- nombres
+
+
+  # calculo correlacion de mediciones de los archivos que tienen 
+  # casos completos por encima del umbral (threshold) dado
+
+    completas <- completas[(completas$nobs > threshold), ] # archivos con n° de 
+    # mediciones completas que superan el umbral
+
+    archivo <- as.character(completas$Archivo) # vector con los archivos 
+    # que superan umbral
+
+
+    # extraigo informacion de cada archivo y calculo resultado
+    lecturas <- NULL; cor <- NULL
+    for (i in seq_along(archivo)){
+      ruta <- paste("Data/", directory, "/", archivo[i], ".csv", sep = "")
+      lecturas[i] <- list(read.csv(ruta))
+  
+      x <- lecturas[[i]][,c(2,3)]
+      x <- x[!is.na(x$sulfate), ]
+      good <- x[!is.na(x$nitrate), ]
+  
+      cor[i] <- cor(good$sulfate, good$nitrate)
+    }
+
+    setwd(old.dir)
+    return(cor)
+
+}
+
+
+cr <- corr("specdata", 150)
+head(cr)
+## [1] -0.01895754 -0.14051254 -0.04389737 -0.06815956 -0.12350667 -0.07588814
+
+summary(cr)
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -0.21057 -0.04999  0.09463  0.12525  0.26844  0.76313
+
+cr <- corr("specdata", 400)
+head(cr)
+## [1] -0.01895754 -0.04389737 -0.06815956 -0.07588814  0.76312884 -0.15782860
+
+summary(cr)
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -0.17623 -0.03109  0.10021  0.13969  0.26849  0.76313
+
+cr <- corr("specdata", 5000)
+summary(cr)
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 
+
+length(cr)
+## [1] 0
+
+cr <- corr("specdata")
+summary(cr)
+##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -1.00000 -0.05282  0.10718  0.13684  0.27831  1.00000
+
+length(cr)
+## [1] 323
+
+
+setwd("Asignaciones de programacion")
+file.create("corr.R")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
