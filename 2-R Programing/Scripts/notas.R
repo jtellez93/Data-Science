@@ -41,5 +41,68 @@ x[!bad]
 
 
 
+### funciones de bucle ####
+
+# lapply(): lapply(list, function, ...)
+# evalua una funcion indicada a todos los elementos de una lista
+# devuelve los resultados como lista
+
+x <- list(a = c(1:10), b = c(11:20))
+y <- lapply(x, mean) # calcula la lmedia de cada elemento de la lista
+class(y)
+
+# sapply(): sapply(list, function, ...)
+# evalua una funcion indicada a todos los elementos de una lista
+# devuelve los resultados como vector de lo contrario como lista
+
+x <- list(a = c(1:10), b = c(11:20))
+y <- sapply(x, mean) # calcula la lmedia de cada elemento de la lista
+class(y)
+
+# apply(): apply(array, margin, ...)
+# evalua una funcion indicada a todos los elementos de una fila o
+# columna seleccionada en el margin (1= filas, 2=columnas)
+# devuelve los resultados como vector
+
+x <- matrix(1:20, 4, 5)
+y <- apply(x, 1, mean) # calcula la media para cada fila
+y
+z <- apply(x, 2, mean) # calcula la media para cada columna
+z
+
+
+# mapply(): mapply(function, ...)
+# version multivariada de lapply y sapply
+# evalua una funcion indicada a multiples objetos (listas)
+# devuelve los resultados como lista
+# sirve para vectorizar funciones que no admiten un vector como argumento.
+
+list(rep(1,4), rep(2,3), rep(3,2), rep(4,1))
+mapply(rep, 1:4, 4:1)
+
+
+# tapply(): tapply(vector, index, function)
+# evalua una funcion a subconjuntos de un vector
+# devuelve los resultados como vector o lista segun el caso
+
+x <- c(rnorm(10), runif(10), rnorm(10, 1))
+f <- gl(3, 10) # genera factores para un patron especificado de niveles
+
+y <- tapply(x, f, mean) # calcula la media a cada subconjunto de x
+# los subconjuntos se indicaron en f
+y
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
