@@ -129,8 +129,13 @@ sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = T))
 # herramientas de depuracion
 
 
+# traceback(): imprime la pila de llamadas del último error detectado
 
+# debug(): imprime todo el codigo de la funcion, 
+# permite ejecutar codigo linea a linea con la letra n "next"
 
+# recover(): puedo usarla como manejador de errores con 
+# options(error = recover)
 
 
 
