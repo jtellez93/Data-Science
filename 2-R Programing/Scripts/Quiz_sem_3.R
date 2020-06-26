@@ -26,4 +26,7 @@ hp_cyl <- tapply(mtcars$hp, mtcars$cyl, mean)
 abs(hp_cyl[1] - hp_cyl[3])
 
 
+# execution of ls will suspendend at the beginning.......
+
+
 
