@@ -430,6 +430,24 @@ lapply(unique_vals, function(elem) elem[2])
 
 
 
+### swirl Lesson 12: vapply and tapply ####
+
+sapply(flags, unique)
+
+vapply(flags, unique, numeric(1))
+ok()
+
+sapply(flags, class)
+vapply(flags, class, character(1))
 
 
+?tapply
+table(flags$landmass)
+table(flags$animate)
 
+
+tapply(flags$animate, flags$landmass, mean)
+tapply(flags$population, flags$red, summary)
+4
+tapply(flags$population, flags$landmass, summary)
+1
