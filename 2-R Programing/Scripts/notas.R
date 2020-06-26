@@ -94,6 +94,45 @@ y
 
 
 
+# split(): function (x, f, drop = FALSE, ...)
+# puede dividir un objeto en categorias indicadas en f
+# una vez dividido se pueden usar las funciones lapply, sapply
+# para aplicar una funcion a grupos individuales
+# devuelve los resultados como lista
+
+
+x <- c(rnorm(10), runif(10), rnorm(10, 1))
+f <- gl(3, 10)
+
+y <- split(x, f)
+y
+
+z <- lapply(split(x, f), mean)
+z
+
+w <- sapply(split(x, f), mean)
+w
+
+library(datasets)
+head(airquality)
+
+s <- split(airquality, airquality$Month) # divido el df por mes
+
+lapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = T))
+# calcula la media para cada mes para tres columnas seleccionadas
+
+sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = T))
+# calcula la media para cada mes para tres columnas seleccionadas
+
+
+### Debugging Tools - Diagnosing the Problem ####
+# herramientas de depuracion
+
+
+
+
+
+
 
 
 
