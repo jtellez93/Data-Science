@@ -13,7 +13,7 @@ Esta tarea se calificará mediante evaluación por pares. Durante la fase de eva
 
 ## Ejemplo: almacenamiento en caché de la media de un vector
 
-En este ejemplo, presentamos el operador '<< -' que se puede utilizar para asignar un valor a un objeto en un entorno que es diferente del entorno actual. A continuación hay dos funciones que se utilizan para crear un objeto especial que almacena un vector numérico y la media de la memoria caché.
+En este ejemplo, presentamos el operador "<< -" que se puede utilizar para asignar un valor a un objeto en un entorno que es diferente del entorno actual. A continuación hay dos funciones que se utilizan para crear un objeto especial que almacena un vector numérico y la media de la memoria caché.
 
 La primera función, makeVector crea un "vector" especial, que es realmente una lista que contiene una función para:
 
