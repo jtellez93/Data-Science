@@ -71,7 +71,7 @@ Para esta asignación, suponga que la matriz suministrada siempre es invertible.
 
 Para completar esta tarea, debe hacer lo siguiente:
 
-1. Bifurca el repositorio de GitHub que contiene los archivos stub R en https://github.com/rdpeng/ProgrammingAssignment2 para crear una copia bajo tu propia cuenta.
+1. Bifurca el repositorio de GitHub que contiene los archivos R de resguardo en https://github.com/rdpeng/ProgrammingAssignment2 para crear una copia bajo tu propia cuenta.
 
 2. Clone su repositorio GitHub bifurcado en su computadora para que pueda editar los archivos localmente en su propia máquina.
 
