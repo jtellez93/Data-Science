@@ -57,7 +57,7 @@ cachemean <- function(x, ...) {
 
 ## Asignación: almacenamiento en caché de la inversa de una matriz
 
-La inversión en matriz suele ser un cálculo costoso y puede haber algún beneficio en el almacenamiento en caché de la inversa de una matriz en lugar de calcularla repetidamente (también hay alternativas a la inversión en matriz que no discutiremos aquí). Su tarea es escribir un par de funciones que almacenan en caché el inverso de una matriz.
+La inversión de una matriz suele ser un cálculo costoso y puede haber algún beneficio en el almacenamiento en caché de la inversa de una matriz en lugar de calcularla repetidamente (también hay alternativas a la inversión en matriz que no discutiremos aquí). **Su tarea es escribir un par de funciones que almacenan en caché el inverso de una matriz.**
 
 Escribe las siguientes funciones:
 
@@ -79,7 +79,7 @@ Para completar esta tarea, debe hacer lo siguiente:
 
 4. Ingrese su archivo R completo en SU repositorio git y empuje su rama git al repositorio GitHub bajo su cuenta.
 
-5. Envíe a Coursera la URL a su repositorio de GitHub que contiene el código R completo para la tarea.
+5. Envíe a Coursera la URL de su repositorio de GitHub que contiene el código R completo para la tarea.
 
 
 Además de enviar la URL para su repositorio de GitHub, deberá enviar el hash SHA-1 de 40 caracteres (como una cadena de números del 0-9 y letras de af) que identifica la confirmación del repositorio que contiene la versión de los archivos que usted quiere enviar. Puedes hacer esto en GitHub haciendo lo siguiente
@@ -88,7 +88,7 @@ Además de enviar la URL para su repositorio de GitHub, deberá enviar el hash S
 
 2. Haga clic en el ``"??`` confirma "enlace donde? es la cantidad de confirmaciones que tiene en el repositorio. Por ejemplo, si realizó un total de 10 confirmaciones en este repositorio, el enlace debería decir "10 confirmaciones".
 
-3. Verá una lista de confirmaciones que ha realizado en este repositorio. El commit más reciente está en la cima. Si esto representa la versión de los archivos que desea enviar, simplemente haga clic en el botón "copiar al portapapeles" en el lado derecho que debería aparecer al pasar el cursor sobre el hash SHA-1. Pegue este hash SHA-1 en el sitio web del curso cuando envíe su tarea. Si no desea utilizar la confirmación más reciente, baje y encuentre la confirmación que desea y copie el hash SHA-1.
+3. Verá una lista de confirmaciones que ha realizado en este repositorio. El ``commit`` más reciente está en la cima. Si esto representa la versión de los archivos que desea enviar, simplemente haga clic en el botón "copiar al portapapeles" en el lado derecho que debería aparecer al pasar el cursor sobre el hash SHA-1. Pegue este hash SHA-1 en el sitio web del curso cuando envíe su tarea. Si no desea utilizar la confirmación más reciente, baje y encuentre la confirmación que desea y copie el hash SHA-1.
 
 
 Una presentación válida se verá algo así (¡esto es solo un ejemplo!)
