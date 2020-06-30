@@ -456,11 +456,104 @@ tapply(flags$population, flags$landmass, summary)
 
 ### swirl Lesson 13: Looking at Data ####
 
+ls() # muestra los objetos de mi espacio de trabajo, global environment
+class(plants)
+dim(plants) # muestra numero de filas y numero de columnas
+nrow(plants) # numero de filas
+ncol(plants) # numero de columnas
+
+object.size(plants) # muestra el espacio ocupado en memoria por el objeto
+
+names(plants) # muestra encabezados del df
+
+head(plants) # muestra las primeras 6 filas
+head(plants, 10) # muestra las primeras 10 filas
+
+tail(plants) # muestra las ultimas 6 filas
+tail(plants, 15) # muestra las ultimas 15 filas
+
+summary(plants)
+
+table(plants$Active_Growth_Period) # frecuencia por categoria
+
+str(plants)
 
 
 
+### swirl Lesson 14: Simulation ####
+
+?sample
+
+sample(1:6, 4, replace = TRUE)
+sample(1:20, 10)
+
+LETTERS
+sample(LETTERS)
+
+flips <- sample(c(0,1), 100, replace = TRUE, prob = c(0.3, 0.7))
+flips
+
+sum(flips)
+
+?rbinom
+rbinom(1, size = 100, prob = 0.7)
+
+flips2 <- rbinom(100, 1, prob = 0.7)
+flips2
+sum(flips2)
+
+?rnorm
+rnorm(10)
+rnorm(10, 100, 25)
+
+?rpois
+rpois(5, 10)
+
+my_pois <- replicate(100, rpois(5, 10))
+# replicate crea una matriz donde cada columna contiene una ejecucion 
+my_pois
+
+cm <- colMeans(my_pois) # calcula la media por columna de una matriz
+hist(cm)
 
 
+### swirl Lesson 15: Base Graphics  ####
+
+data(cars)
+?cars
+
+head(cars)
+
+plot(cars)
+?plot
+
+plot(x = cars$speed, y = cars$dist)
+plot(dist ~ speed, cars)
+
+plot(x = cars$dist, y = cars$speed)
+
+plot(x = cars$speed, y = cars$dist, xlab = "Speed")
+plot(x = cars$speed, y = cars$dist, ylab = "Stopping Distance")
+plot(x = cars$speed, y = cars$dist, xlab = "Speed", ylab = "Stopping Distance")
+
+plot(cars, main = "My Plot")
+plot(cars, sub = "My Plot Subtitle")
+
+plot(cars, col = 2) # color rojo.
+
+plot(cars, xlim = c(10, 15)) # limita los valores del eje x
+
+plot(cars, pch = 2) # cambia forma de los puntos
+
+
+
+data(mtcars)
+
+?boxplot
+
+boxplot(mpg ~ cyl, mtcars)
+
+hist(mtcars$mpg)
 
 
 
