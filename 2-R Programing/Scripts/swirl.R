@@ -451,3 +451,23 @@ tapply(flags$population, flags$red, summary)
 4
 tapply(flags$population, flags$landmass, summary)
 1
+
+
+
+### swirl Lesson 13: Looking at Data ####
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

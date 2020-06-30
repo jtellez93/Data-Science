@@ -139,14 +139,179 @@ sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = T))
 
 
 
-# The str Function
+### The str Function ####
+
+# Muestra de forma compacta la estructura interna de un objeto R, 
+# una función de diagnóstico y una alternativa al resumen 
+# (y, en cierta medida, dput). Idealmente, 
+# solo se muestra una línea para cada estructura "básica".
+
+
+str(str)
+# function (object, ...)
+
+str(lm)
+str(ls)
+
+x <- rnorm(100, 2, 4)
+summary(x)
+str(x)
+
+f <- gl(40, 10)
+str(f)
+summary(f)
+
+library(datasets)
+head(airquality)
+
+str(airquality)
+
+
+m <- matrix(rnorm(100), 10, 10)
+str(m)
+
+s <- split(airquality, airquality$Month)
+str(s)
 
 
 
+### Simulation ####
+
+# Generating Random Numbers
+
+# para cada distribucion de probabilidad hay 
+# funciones asociadas por letra (d, r, p, q)
+# d = densidad
+# r = generacion de variables aleatorios
+# p = distribucion acumulada
+# q = funcion cuantil
+
+x <- rnorm(10)
+x
+
+x <- rnorm(10, 20, 2)
+x
+summary(x)
+
+
+set.seed(1) # establece el valor de la semilla para la generacion de 
+# numeros seudo aleatorios
+rnorm(5)
+
+rpois(10, 1)
+rpois(10, 20)
+
+ppois(2, 2) # distribucion acumulada
+# [1] 0.6766764 Pr(x <= 2)
+
+ppois(4, 2) 
+# [1] 0.947347 Pr(x <= 4)
+
+ppois(6, 2) 
+# [1] 0.9954662 Pr(x <= 4)
+
+
+# Simulating a Linear Model
+
+
+# asuma el siguiente modelo de regresion lineal 
+# y = B0 + B1x + epxilon
+# epxilon ~ N(0. 2^2)
+# x ~ N(0, 1^2), B0= 0.5, B1 = 2
+
+set.seed(20)
+x <- rnorm(100)
+e <- rnorm(100, 0, 2)
+y = 0.5 + 2 * x + e
+
+summary(y)
+plot(x, y)
+
+
+set.seed(10)
+x <- rbinom(100, 1, 0.5)
+e <- rnorm(100, 0, 2)
+y = 0.5 + 2 * x + e
+
+summary(y)
+plot(x, y)
+
+
+# generar numeros aleatorios de un modleo lineal generalizado
+
+# Y = Poisson(mu)
+# log mu = B0 + B1x
+# B0 = 0.5, B1 = 0.3
+
+set.seed(1)
+x <- rnorm(100)
+log.mu <- 0.5 + 0.3 * x
+
+y = rpois(100, exp(log.mu))
+
+summary(y)
+plot(x, y)
+
+
+# Random Sampling
+
+set.seed(1)
+sample(1:10, 4) # toma una muestra aleatoria de un tamañp dado de un objeto
+sample(letters, 5)
+
+sample(1:10)
+sample(1:10, replace = TRUE) # muestra con reemplazo
 
 
 
+# Profiling R code
+# analisis de rendimiento
+# se usa para optimizar el codigo, es una forma sistematica de revisar
+# el tiempo que tarda en ejecucion cada proceso del codigo
 
 
+# system.time(expr, gcFirst = TRUE)
+# evalua el tiempo de ejecucion de una expresion
+# retorna los el tiempo de ejecucion en segundos
+
+# user time: tiempo usado de la CPU por la expresion
+# elapsed time: tiempo observado por el usuario
+
+
+# Tiempo de ususario mayor al de la maquina
+system.time(readLines("http://www.jhsph.edu"))
+#  user  system elapsed 
+#  0.14    0.01    1.68 
+
+
+# Tiempo de ususario menor al de la maquina
+hilbert <- function(n){
+        i <- 1:n
+        1 / outer(i - 1, i, "+")
+}
+
+x <- hilbert(1000)
+
+system.time(svd(x))
+#  user  system elapsed 
+#   4.06    0.01    4.44
+
+
+system.time({
+        n <- 1000
+        r <- numeric(n)
+        for(i in 1:n){
+                x <- rnorm(n)
+                r[i] <- mean(x)
+        }
+})
+
+#  user  system elapsed 
+#   0.13    0.00    0.13
+
+
+# Rprof(...) inicia el analizador de R
+# summaryRprof(...) resume los resultados del analizador
+# no se puede usar junto con la funcion system.time()
 
 
