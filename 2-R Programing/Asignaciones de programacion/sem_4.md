@@ -91,13 +91,13 @@ devolvería un vector de caracteres que contiene el nombre del hospital con la q
 
 ~~~
 > head(texas)
-Hospital.Name Rate Rank
-3935 FORT DUNCAN MEDICAL CENTER 8.1 1
-4085 TOMBALL REGIONAL MEDICAL CENTER 8.5 2
-4103 CYPRESS FAIRBANKS MEDICAL CENTER 8.7 3
-3954 DETAR HOSPITAL NAVARRO 8.7 4
-4010 METHODIST HOSPITAL,THE 8.8 5
-3962 MISSION REGIONAL MEDICAL CENTER 8.8 6
+                         Hospital.Name  Rate  Rank
+3935        FORT DUNCAN MEDICAL CENTER   8.1     1
+4085   TOMBALL REGIONAL MEDICAL CENTER   8.5     2
+4103  CYPRESS FAIRBANKS MEDICAL CENTER   8.7     3
+3954            DETAR HOSPITAL NAVARRO   8.7     4
+4010            METHODIST HOSPITAL,THE   8.8     5
+3962   MISSION REGIONAL MEDICAL CENTER   8.8     6
 ~~~
 
 Note que Cypress Fairbanks Medical Center y Detar Hospital Navarro tienen la misma puntuacion de 30 días (8.7). Sin embargo, debido a que Cypress viene antes de Detar alfabéticamente, Cypress ocupa el puesto número 3 en este esquema y Detar está clasificado como número 4. Uno puede usar la función de orden para ordenar múltiples vectores de esta manera (es decir, donde un vector se usa para romper lazos en otro vector )
@@ -122,7 +122,6 @@ Aquí hay algunos resultados de muestra de la función.
 > rankhospital("TX", "heart failure", 4)
 [1] "DETAR HOSPITAL NAVARRO"
 > rankhospital("MD", "heart attack", "worst")
-3
 [1] "HARFORD MEMORIAL HOSPITAL"
 > rankhospital("MN", "heart attack", 5000)
 [1] NA
