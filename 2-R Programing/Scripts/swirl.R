@@ -161,7 +161,7 @@ x[3000]
 x[c(-2, -10)] # excluir valores
 x[-c(2, 10)]
 
-vect <- c(foo = 11, bar = 2, norf = NA) # vector con normbres 
+vect <- c(foo = 11, bar = 2, norf = NA) # vector con nombres 
 names(vect)
 
 vect2<- c(11, 2, NA)
