@@ -141,19 +141,45 @@ rankall <- function(outcome, num = "best") {
         datos <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
         x <- c("heart attack", "heart failure", "pneumonia")
         
-        ## Check that state and outcome are valid
-        if (any(state == datos[, 7]) == FALSE){
-                stop("invalid state")
-        }
-        
+        ## Check that outcome are valid
         if (any(outcome == x) == FALSE){
                 stop("invalid outcome")
         }
         
         ## For each state, find the hospital of the given rank
+        if(outcome == "heart attack") i <- 11
+        if(outcome == "heart failure") i <- 17
+        if(outcome == "pneumonia") i <- 23
+        
+        estados <- unique(datos$State)
+        estados <- sort(estados)
+        y <- list()
+        
+        for (j in estados){
+                
+                y[[j]] <- datos[datos$State == j, c(2, 7, i)]
+                names(y[[j]]) <- c("hospital", "state", "rate")
+                y[[j]][["rate"]] <- suppressWarnings(as.numeric(y[[j]][["rate"]]))
+                
+                y[[j]] <- y[[j]][!is.na(y[[j]]$rate), ]
+                y[[j]] <- y[[j]][order(y[[j]]$rate, y[[j]]$hospital), ]
+                
+                if (num == "best"){
+                        y[[j]] <- y[[j]][1, 1]
+                } else if (num == "worst"){
+                        y[[j]] <- y[[j]][nrow(y[[j]]), 1]
+                } else{
+                        y[[j]] <- y[[j]][num, 1]
+                }
+        }
+        
+        rank <- data.frame(matrix(unlist(y), nrow = length(y), byrow = T))
+        rank <- cbind(rank, estados)
+        names(rank) <- c("hospital", "state")
         
         ## Return a data frame with the hospital names and the
         ## (abbreviated) state name
+        return(rank)
 }
 
 
@@ -162,7 +188,7 @@ rankall <- function(outcome, num = "best") {
 old.dir <- "D:/Documents/GitHub/Data-Science/2-R Programing"
 path.scripts <- "D:/Documents/GitHub/Data-Science/2-R Programing/Scripts"
 setwd(path.scripts)
-source("rankhospital.R")
+source("rankall.R")
 path <- "D:/Documents/GitHub/Data-Science/2-R Programing/Data/rprog_data_ProgAssignment3-data"
 setwd(path)
 
@@ -171,53 +197,3 @@ tail(rankall("pneumonia", "worst"), 3)
 tail(rankall("heart failure"), 10)
 
 setwd(old.dir)
-
-
-
-
-
-
-
-
-
-
-### para experimentar ####
-res <- "heart attack"
-num <- 20
-
-if(res == "heart attack") i <- 11
-if(res == "heart failure") i <- 17
-if(res == "pneumonia") i <- 23
-
-estados <- unique(outcome$State)
-estados <- sort(estados)
-y <- list()
-
-for (j in estados){
-        
-        y[[j]] <- outcome[outcome$State == j, c(2, 7, as.numeric(i))]
-        names(y[[j]]) <- c("hospital", "state", "rate")
-        y[[j]] <- y[[j]][!is.na(y[[j]]$rate), ]
-        y[[j]] <- y[[j]][order(y[[j]]$rate), ]
-
-        if (num == "best"){
-                y[[j]] <- y[[j]][1, c(1, 2)]
-        } else if (num == "worst"){
-                y[[j]] <- y[[j]][nrow(y), c(1, 2)]
-        } else{
-                y[[j]] <- y[[j]][num, c(1, 2)]
-        }
-}
-
-rank <- data.frame(matrix(unlist(y), nrow = length(y), byrow = T))
-names(rank) <- c("hospital", "state")
-
-
-head(rank, 10)
-
-
-
-
-
-
-
