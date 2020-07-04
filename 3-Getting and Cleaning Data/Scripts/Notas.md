@@ -1,14 +1,3 @@
----
-title: "Notas"
-author: "Julián David Téllez"
-date: "3/7/2020"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 
 ## Components of Tidy Data
 1 datos en bruto
@@ -31,7 +20,7 @@ se debe describir paso a paso como optener la salida
 
 ## Downloading files
 
-```{r echo=TRUE}
+~~~
 file.exists("directoyName") # valida si el directorio existe
 dir.create("directoyName") # crea el directorio si este no existe
 
@@ -40,14 +29,13 @@ dir.create("directoyName") # crea el directorio si este no existe
 if(!file.exists("data")){
         dir.create("data")
 }
-
-```
+~~~
 
 ## Getting data from the internet
 
-se hace usando la funcion 'download.file()' 
+se hace usando la funcion ''download.file()'' 
 
-```{r echo=TRUE}
+~~~
 fileUrl <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.csv?accessType=DOWNLOAD"
 
 download.file(fileUrl, destfile = "./data/cameras.csv", method = "curl")
@@ -55,10 +43,12 @@ list.files("./data") # muestra los archivos en el directorio
 
 dateDownloaded <- date() # guardo la fecha en la que descargue la informacion
 dateDownloaded
-```
+~~~
 
 
-## Getting data from the internet
+## Reading local flat files
+
+
 
 
 
