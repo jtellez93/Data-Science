@@ -33,7 +33,7 @@ if(!file.exists("data")){
 
 ## Getting data from the internet
 
-se hace usando la funcion ''download.file()'' 
+se hace usando la funcion ``download.file()``
 
 ~~~
 fileUrl <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.csv?accessType=DOWNLOAD"
@@ -48,9 +48,33 @@ dateDownloaded
 
 ## Reading local flat files
 
+para leer archivos planos usamos ``read.table()``
+estos son algunos parametros importantes ``header, sep, row.names, nrows``
+
+estas son funciones relacionadas ``read.csv(), read.csv2()``
+
+~~~
+cameraData <- read.table("./Data/data/cameras.csv", sep = ",", header = TRUE)
+head(cameraData)
+
+cameraData <- read.csv("./Data/data/cameras.csv")
+head(cameraData)
+
+# read.csv tiene por defecto el separador por comas
+~~~
 
 
+## Reading XML
+Extensible markup language
+Lenguaje de marcado extensible
 
+es frecuentemente usaDO para guardar estructuras de datos, particularmente muy usado en aplicaciones de internet, extraer XML es la base para la mayoría del  web scraping
+**componentes**
+* Markup: etiquetas que dan la estructura del texto
+* Content: el texto real del documento
+~~~
+
+~~~
 
 
 
