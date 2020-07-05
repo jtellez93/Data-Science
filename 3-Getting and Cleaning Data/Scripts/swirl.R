@@ -6,7 +6,7 @@ install_from_swirl("Getting and Cleaning Data")
 swirl()
 
 
-### leccion 1: Manipulating Data with dplyr
+### leccion 1: Manipulating Data with dplyr ####
 
 
 mydf <- read.csv(path2csv, stringsAsFactors = FALSE)
@@ -108,7 +108,7 @@ mutate(cran3, correct_size = size + 1000)
 summarize(cran, avg_bytes = mean(size))
 
 
-### leccion 2: Grouping and Chaining with dplyr
+### leccion 2: Grouping and Chaining with dplyr ####
 
 library(dplyr)
 
@@ -163,6 +163,123 @@ top_unique_sorted <- arrange(top_unique, desc(unique))
 View(top_unique_sorted)
 
 
+### leccion 3: Tidying Data with tidyr ####
+library(dplyr)
+library(tidyr)
 
-### leccion 3: Tidying Data with tidyr
-### leccion 4: Dates and Times with lubridate
+3
+students
+# la variable sexo se encuentra en dos columnas 
+# para reunir la variable en una sola columna puedo usar la funcion gather()
+?gather
+gather(students, key = sex, value = count, -grade)
+
+# actualmente se recomienda el uso de pivot_longer()
+
+students2
+# la variable sexo esta dividida en 4 columnas debe reunirse en una sola 
+gather(students2, key =  sex_class, value = count, -grade)
+res <- gather(students2, sex_class, count, -grade)
+res
+
+# ahora tengo la variable sexo y sexclass en una columna debo separarlas
+# siempre debe estar una variable en una columna
+# para este caso usamos separate()
+# Separe una columna de caracteres en varias columnas con una expresión regular o ubicaciones numéricas
+
+?separate
+separate(data = res, col = sex_class, into = c("sex", "class"))
+
+# da el mismo resultado si lo hacemos encadenando con %>%
+
+students2 %>%
+        gather( sex_class, count, -grade) %>%
+        separate( sex_class, c("sex", "class")) %>%
+        print
+
+
+# en este caso hay que reunir las clases por grado 
+students3
+students3 %>%
+        gather( class, grade, class1:class5 , na.rm = TRUE) %>%
+        print
+
+# el siguiente paso requiere de spread()
+?spread
+# Distribuya un par clave-valor en varias columnas.
+
+students3 %>%
+        gather(class, grade, class1:class5, na.rm = TRUE) %>%
+        spread( test, grade) %>%
+        print
+
+
+library(readr)
+parse_number("class5")
+# Esto elimina los caracteres no numéricos antes o después del 
+# primer número. La marca de agrupación especificada por la 
+# configuración regional se ignora dentro del número.
+
+# si deseo cambiar las palabras class_1, class_2... 
+#utilizo esta funcion para que solo quede la parte numerica 1,2...
+
+students3 %>%
+        gather(class, grade, class1:class5, na.rm = TRUE) %>%
+        spread(test, grade) %>%
+        mutate(class = parse_number(class)) %>%
+        print
+
+# otro problema con messy data
+
+students4
+# los datos estan organizados por variable y por observacion
+# sin enbargo hay observaciones repetidas para id, nombre y sex, por tanto 
+# deben separarse en tablas diferentes
+
+student_info <- students4 %>%
+        select( id, name, sex)%>%
+        unique()
+
+gradebook <- students4 %>%
+        select(id, class, midterm, final)
+
+# para relacionar tablas tenemos este ejemplo con dos tablas
+passed
+failed
+
+# primero creamos una columna llamada status con la 
+# etiqueta passed o failed a los estudientes que aprobaron o perdieron
+
+passed <- passed %>% mutate(status = "passed")
+failed <- failed %>% mutate(status = "failed")
+
+# para unir estas dos tablas usamos bind_rows()
+# esta funcion sirve para para vincular muchos df en uno.
+?bind_rows
+
+bind_rows(passed, failed)
+
+
+# I've created a variable called 'sat' in your workspace, which contains data
+# on all college-bound seniors who took the SAT exam in 2013
+
+sat
+sat %>%
+        select(-contains("total")) %>%
+        gather(part_sex, count, -score_range) %>%
+        separate(part_sex, c("part", "sex")) %>%
+        print
+
+
+sat %>%
+        select(-contains("total")) %>%
+        gather(part_sex, count, -score_range) %>%
+        separate(part_sex, c("part", "sex")) %>%
+        group_by(part, sex) %>%
+        mutate(total = sum(count), prop = count / total) %>% 
+        print
+
+
+### leccion 4: Dates and Times with lubridate ####
+
+
