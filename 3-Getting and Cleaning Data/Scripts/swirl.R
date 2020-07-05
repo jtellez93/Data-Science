@@ -282,4 +282,99 @@ sat %>%
 
 ### leccion 4: Dates and Times with lubridate ####
 
+Sys.getlocale("LC_TIME") # muestra configuracion local de tiempo
+library(lubridate)
+?lubridate
+help(package = lubridate)
+# Lubridate proporciona herramientas que facilitan el análisis
+# y la manipulación de fechas
 
+today() # devuelve la fecha del dia actual
+
+this_day <- today()
+this_day
+
+year(this_day); month(this_day); day(this_day)
+
+wday(this_day) # devuelve el dia de la semanba, iniciando el domingo = 1
+# si quiero ver el orden de los dias uso el argumento label = TRUE
+
+wday(this_day, label = TRUE)
+
+now() # devuelve fecha y hora del momento que se ejecuta
+
+this_moment <- now()
+this_moment
+
+hour(this_moment); minute(this_moment); second(this_moment)
+
+# para trabajar formatos de fecha uso las funciones
+# ymd(), dmy(), hms(), ymd_hms()... etc
+# y = año, m = mes, d = dia
+
+
+my_date <- ymd("1989-05-17")
+my_date
+
+class(my_date)
+
+ymd("1989 May 17")
+mdy("March 12, 1975")
+dmy(25081985)
+ymd("1920-1-2")
+
+dt1
+ymd_hms(dt1)
+hms("03:22:14")
+
+
+dt2
+ymd(dt2)
+
+# la funcion update permite modificar valores de un objeto tipo fecha
+update(this_moment, hours = 8, minutes = 34, seconds = 55)
+this_moment
+
+this_moment <- update(this_moment, hours = 8, minutes = 34, seconds = 55)
+this_moment
+
+
+nyc <- now("America/New_York") # a now tambien puedo agregarle zona horaria
+nyc
+
+nyc + days(2) # de esta forma sumo dos dias a una fehca establecida
+
+depart <- nyc + days(2)
+depart
+
+depart <- update(depart, hours = 17, minutes = 34)
+depart
+
+arrive <- depart + hours(15) + minutes(50)
+
+
+?with_tz
+# with_tz devuelve una fecha y hora como aparecería
+# en una zona horaria diferente. 
+# El momento real del tiempo medido no cambia, 
+# solo el huso horario en el que se mide
+
+arrive <- with_tz(arrive, "Asia/Hong_Kong")
+arrive
+
+
+last_time <- mdy("June 17, 2008", tz = "Singapore")
+last_time
+
+# Intervalo () crea un objeto Intervalo con las fechas de inicio y
+# finalización especificadas. 
+# Si la fecha de inicio ocurre antes de la fecha de finalización,
+# el intervalo será positivo. De lo contrario, será negativo.
+?interval
+
+how_long <- interval(last_time, arrive)
+how_long
+
+as.period(how_long) # muestra la amplitud del intervalo
+
+stopwatch()
