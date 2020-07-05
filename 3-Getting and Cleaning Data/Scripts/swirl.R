@@ -110,6 +110,57 @@ summarize(cran, avg_bytes = mean(size))
 
 ### leccion 2: Grouping and Chaining with dplyr
 
+library(dplyr)
+
+cran <- tbl_df(mydf)
+rm("mydf")
+cran
+
+# puedo agrupar variables deacuerdo a categorias con group_by()
+
+?group_by
+
+by_package <- group_by(cran, package)
+by_package
+
+# una vez agrupados es mas interesante usar summarize para calcular por grupos
+
+summarize(by_package, mean(size))
+
+# tambien puedo sacar varios resumenes y guardarlos en un objeto
+pack_sum <- summarize(by_package,
+                      count = n(),
+                      unique = n_distinct(ip_id),
+                      countries = n_distinct(country),
+                      avg_bytes = mean(size))
+
+pack_sum
+
+
+# si quiero saber el numero de paquetes deacuerdo al numero de 
+# descargas que estan por encima del 99% uso la funcion quantile()
+quantile(pack_sum$count, probs = 0.99)
+
+#los que tienen mas de 679 estan en el cuantil 99% 
+
+top_counts <- filter(pack_sum, count > 679)
+top_counts
+
+View(top_counts)
+
+top_counts_sorted <- arrange(top_counts, desc(count))
+
+View(top_counts_sorted)
+
+# cuantil 99% para lal columna unique
+quantile(pack_sum$unique, probs = 0.99)
+
+# son las filas conmas de 465 
+top_unique <- filter(pack_sum, unique > 465)
+View(top_unique)
+
+top_unique_sorted <- arrange(top_unique, desc(unique))
+View(top_unique_sorted)
 
 
 
