@@ -2,10 +2,11 @@
 ### Reading mySQL ####
 
 # los datos estan estructurados en bases de datos
-# en tablas con bases de datos
-# en campos con tablas
+# en bases de datos con tablas
+# en tablas con campos
 
-# cada fila es llamada record
+# cada campo es una columna (variable)
+# cada fila es llamada record (observacion)
 
 install.packages("RMySQL")
 install.packages("DBI")
@@ -74,5 +75,120 @@ dbDisconnect(hg19)
 
 
 ### Reading HDF5 ####
+# Hierarchical Data Format
+# Formato de datos jerárquico
+
+# este formato es usado para guardar datasets grandes
+# Conjuntos de datos, que son matrices multidimensionales de tipo homogéneo
+# Grupos, que son estructuras de contenedor que pueden contener datasets y otros grupos
+
+
+### Reading from the Web ####
+
+## Webscraping o raspado web
+# el web scraping se enfoca en la transformación de datos sin estructura
+# en la web (como el formato HTML) en datos estructurados
+# que pueden ser almacenados y analizados en una base de datos central,
+# en una hoja de cálculo o en alguna otra fuente de almacenamiento.
+
+# Alguno de los usos del web scraping son
+# la comparación de precios en tiendas, 
+# la monitorización de datos relacionados con el clima de cierta región,
+# la detección de cambios en sitios webs
+# y la integración de datos en sitios webs.
+# También es utilizado para obtener información relevante
+# de un sitio a través de los rich snippets.
+
+
+## Getting data off webpages - readLines()
+# la funcion readLines() permiter leer codigo HTML de internet
+
+con <- url("https://scholar.google.com/citations?hl=es&user=HI-I6C0AAAAJ")
+htmlCode <- readLines(con, warn = F) # lemos el codigo HTML
+# el argumento warn omite el warning cuando detecta
+# que no encuentra linea final en la url que indicamos
+
+close(con) # permite cerrar la conexion,
+# debo hacerlo antes de empezar a trabajar con los datos
+
+htmlCode # muestra el codigo HTML
+
+
+
+### Parsing with XML ###
+library(RCurl)
+library(XML)
+
+url <- "https://scholar.google.com/citations?hl=es&user=HI-I6C0AAAAJ"
+
+xData <- getURL(url)
+html <- htmlTreeParse(xData, useInternalNodes = T)
+
+xpathSApply(html, "//title", xmlValue)
+
+xpathSApply(html, "//td[@class='gsc_a_c']", xmlValue)
+xpathSApply(html, "//td[@class='gsc_a_y']", xmlValue)
+
+
+### Get from the httr package ####
+
+library(httr)
+
+html2 <- GET(url)
+content2 <- content(html2, as = "text")
+parsedHtml <- htmlParse(content2, asText = TRUE)
+
+xpathSApply(parsedHtml, "//title", xmlValue)
+
+xpathSApply(parsedHtml, "//td[@class='gsc_a_c']", xmlValue)
+xpathSApply(parsedHtml, "//td[@class='gsc_a_y']", xmlValue)
+
+
+
+### Accesing websites with passwords #### 
+
+pg1 <- GET("http://httpbin.org/basic-auth/user/passwd")
+pg1
+
+# Response [http://httpbin.org/basic-auth/user/passwd]
+# Date: 2020-07-06 03:03
+# Status: 401
+# Content-Type: <unknown>
+#         <EMPTY BODY>
+# el status indica que no se ha podido acceder
+#dado que requiere logearse
+
+
+# con el paquete HTTR realmente puede autenticarse 
+# para los sitios web, y puede hacerlo
+# asignando a esto lo que llamaremos el identificador.
+pg2 <- GET("http://httpbin.org/basic-auth/user/passwd",
+           authenticate("user","passwd"))
+# en los argumentos de authenticate 
+#van las credenciales para logearse, usuario y contraseña
+pg2
+# Response [http://httpbin.org/basic-auth/user/passwd]
+# Date: 2020-07-06 03:06
+# Status: 200
+# Content-Type: application/json
+# Size: 47 B
+# {
+#         "authenticated": true, 
+#         "user": "user"
+# }
+
+names(pg2)
+
+
+### Using handles ####
+
+google <- handle("http://google.com")
+
+pg1 <- GET(handle = google, path = "/")
+pg2 <- GET(handle = google, path = "search")
+
+
+
+### Reading data from APIs
 
 
