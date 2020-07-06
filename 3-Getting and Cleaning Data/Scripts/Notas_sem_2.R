@@ -190,5 +190,11 @@ pg2 <- GET(handle = google, path = "search")
 
 
 ### Reading data from APIs
+# APIs = aplication programming interfaces
+# como ejemplo se trabajara con twitter
+
+# inicialmente debo crear una cuenta en developer.twitter
+
+
 
 
