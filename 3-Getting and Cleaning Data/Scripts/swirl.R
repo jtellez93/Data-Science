@@ -162,6 +162,30 @@ View(top_unique)
 top_unique_sorted <- arrange(top_unique, desc(unique))
 View(top_unique_sorted)
 
+View(result3)
+
+
+cran %>%
+        select(ip_id, country, package, size) %>%
+        print
+
+cran %>%
+        select(ip_id, country, package, size) %>%
+        mutate(size_mb = size / 2^20) %>%
+        print
+
+cran %>%
+        select(ip_id, country, package, size) %>%
+        mutate(size_mb = size / 2^20) %>%
+        filter(size_mb <= 0.5) %>%
+        print
+
+cran %>%
+        select(ip_id, country, package, size) %>%
+        mutate(size_mb = size / 2^20) %>%
+        filter(size_mb <= 0.5) %>%
+        arrange(desc(size_mb)) %>%
+        print
 
 ### leccion 3: Tidying Data with tidyr ####
 library(dplyr)

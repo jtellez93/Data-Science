@@ -197,4 +197,23 @@ pg2 <- GET(handle = google, path = "search")
 
 
 
+### algunas funciones utiles ####
 
+ceiling(3.475) # redondea hacia arriba
+# [1] 4
+
+floor(3.475) # redondea hacia abajo
+# [1] 3
+
+round(3.475, digits = 2) # redondea a un numero especifico de decimales
+# [1] 3.48
+
+signif(3.475, digits = 2) # redondea a un numero especifico de digitos significativos
+# [1] 3.5
+
+
+merge() # Combine dos df por columnas comunes 
+# o nombres de fila, o realice otras versiones de operaciones 
+# de unión de bases de datos.
+
+join() # permite hacer cruze de tablas, busquedas por una columna en comun
