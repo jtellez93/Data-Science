@@ -17,7 +17,7 @@ library(dplyr)
 packageVersion("dplyr")
 
 cran <- tbl_df(mydf)
-rm(mydf)
+rm("mydf")
 
 ?tbl_df # ahora se debe usar as_tibble()
 cran
