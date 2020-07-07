@@ -262,10 +262,16 @@ students4
 
 student_info <- students4 %>%
         select( id, name, sex)%>%
-        unique()
+        print
+
+student_info <- students4 %>%
+        select(id, name, sex) %>%
+        unique() %>%
+        print
 
 gradebook <- students4 %>%
-        select(id, class, midterm, final)
+        select(id, class, midterm, final) %>%
+        print
 
 # para relacionar tablas tenemos este ejemplo con dos tablas
 passed
