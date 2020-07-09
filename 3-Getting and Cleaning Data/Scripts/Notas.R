@@ -217,3 +217,90 @@ merge() # Combine dos df por columnas comunes
 # de unión de bases de datos.
 
 join() # permite hacer cruze de tablas, busquedas por una columna en comun
+
+
+
+
+### Editing text Variables  ####
+
+
+fileUrl <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.csv?accesType=DOWNLOAD"
+download.file(fileUrl, "./Data/datos_sem4_video1.csv", method = "curl")
+
+cameraData <- read.csv("./Data/datos_sem4_video1.csv")
+names(cameraData)
+
+# la funcion tolower() Traduce caracteres en vectores de caracteres,
+# en particular de mayúsculas a minúsculas o viceversa.
+tolower(names(cameraData))
+
+
+# la function strsplit() Divide los elementos de un vector
+# de caracteres x en subcadenas de acuerdo con las coincidencias 
+# con la subcadena dividida dentro de ellos.
+
+# divide texto de acuerdo con el separador que se especifique
+# en el segundo argumento
+
+splitnames <- strsplit(names(cameraData), split = "\\.")
+
+splitnames[[5]]
+# [1] "intersection"
+
+splitnames[[6]]
+# [1] "Location" "1"
+
+splitnames[[7]]
+# [1] "X2010"         "Census"        "Neighborhoods"
+
+
+
+mylist <- list(letters = c("A", "b", "c"), 
+               numbers = 1:3, matrix(1:25, ncol = 5))
+head(mylist)
+
+# primer elemento de la lista
+mylist[1] 
+mylist$letters
+mylist[[1]]
+
+
+# reemplazar caracteres en un a cadena de texto
+testName <- "this_is_a_test"
+
+# la funcion sub() reemplaza elprimer argumento que coincida 
+# con el especificado con uno que tambien se especifica
+sub("_", "", testName)
+
+# la funcion gsub() reemplaza todo lo que conincida 
+gsub("_", "", testName)
+
+
+
+# la funcion nchar() cuenta el numero de caracteres de una cadena 
+
+nchar("julian tellez")
+# [1] 13
+
+# la funcion substr() extrae caracteres de un inicio a un fin 
+substr("julian tellez", 1, 6)
+# [1] "julian"
+
+# la funcion paste0() concatena sin separar palabras
+paste0("julian", "tellez")
+# [1] "juliantellez"
+
+# la funcion strtrim() recorta los espacios deja solo los caracteres
+strtrim("julian    ", width = 6)
+
+
+
+### Regular Expressions ####
+
+
+
+
+
+
+
+
