@@ -295,12 +295,43 @@ strtrim("julian    ", width = 6)
 
 
 
-### Regular Expressions ####
+### Working whit dates ####
+
+d2 <- Sys.Date()
+d2
+
+class(d2)
+
+# formatting dates
+# %d = dia (0-31)
+# %a = dia de la semana abreviado
+# %A = dia de la semana completo
+# %m = mes (0-12)
+# %b = mes abreviado
+# %B = mes completo
+# %y = año en 2 digitos
+# %Y = año en 4 digitos
+
+format(d2, "%a %b %d")
 
 
+# creating dates
+
+x <- c("1feb1960", "2feb1960", "31mar1960", "30jul19460")
+z <- as.Date(x, "%d%b%Y")
+z
+
+z[1]-z[2]
+as.numeric(z[1]-z[2])
 
 
+# converting to julian
+weekdays(d2)
+months(d2)
+
+julian(d2) # extrae partes de un objeto tipo fecha, devuelve el valor desde el origen
 
 
+# lubridate
 
 
