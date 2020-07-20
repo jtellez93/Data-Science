@@ -338,6 +338,7 @@ this_moment
 
 hour(this_moment); minute(this_moment); second(this_moment)
 
+
 # para trabajar formatos de fecha uso las funciones
 # ymd(), dmy(), hms(), ymd_hms()... etc
 # y = año, m = mes, d = dia
@@ -351,7 +352,8 @@ class(my_date)
 ymd("1989 May 17")
 mdy("March 12, 1975")
 dmy(25081985)
-ymd("1920-1-2")
+ymd("192012")
+ymd("1920/1/2")
 
 dt1
 ymd_hms(dt1)
