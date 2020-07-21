@@ -4,3 +4,74 @@ library(reshape2)
 
 
 # obtener conjunto de datos de la web
+
+rawDataDir <- "./Project/rawData"
+rawDataUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+rawDataFilename <- "rawData.zip"
+rawDataDFn <- paste(rawDataDir, "/", "rawData.zip", sep = "")
+dataDir <- "./Project/data"
+
+if (!file.exists(rawDataDir)) {
+        dir.create(rawDataDir)
+        download.file(url = rawDataUrl, destfile = rawDataDFn)
+}
+if (!file.exists(dataDir)) {
+        dir.create(dataDir)
+        unzip(zipfile = rawDataDFn, exdir = dataDir)
+}
+
+# 1. Fusiona los conjuntos de entrenamiento y prueba para crear 
+# un conjunto de datos.
+
+# datos de entrenamiento
+x_train <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/train/X_train.txt"))
+y_train <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/train/Y_train.txt"))
+s_train <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/train/subject_train.txt"))
+
+# datos de prueba
+x_test <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/test/X_test.txt"))
+y_test <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/test/Y_test.txt"))
+s_test <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/test/subject_test.txt"))
+
+# un solo conjunto de datos
+x_data <- rbind(x_train, x_test)
+y_data <- rbind(y_train, y_test)
+s_data <- rbind(s_train, s_test)
+
+
+
+
+# 2. Extrae solo las mediciones de la media y la desviación estándar 
+# para cada medición.
+feature <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/features.txt"))
+
+# activity labels
+a_label <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/activity_labels.txt"))
+a_label[,2] <- as.character(a_label[,2])
+
+# extraer de feature las filas que contengan 'mean, std'
+selectedCols <- grep("-(mean|std).*", as.character(feature[,2]))
+selectedColNames <- feature[selectedCols, 2]
+selectedColNames <- gsub("-mean", "Mean", selectedColNames)
+selectedColNames <- gsub("-std", "Std", selectedColNames)
+selectedColNames <- gsub("[-()]", "", selectedColNames)
+
+
+
+
+# 3. Utiliza nombres descriptivos de actividades para nombrar
+# las actividades en el conjunto de datos.
+x_data <- x_data[selectedCols]
+allData <- cbind(s_data, y_data, x_data)
+colnames(allData) <- c("Subject", "Activity", selectedColNames)
+allData$Activity <- factor(allData$Activity, levels = a_label[,1], labels = a_label[,2])
+allData$Subject <- as.factor(allData$Subject)
+
+
+# 4. Etiqueta adecuadamente el conjunto de datos con nombres de variables descriptivas.
+meltedData <- melt(allData, id = c("Subject", "Activity"))
+tidyData <- dcast(meltedData, Subject + Activity ~ variable, mean)
+
+write.table(tidyData, "./Project/tidy_dataset.txt", row.names = FALSE, quote = FALSE)
+
+
