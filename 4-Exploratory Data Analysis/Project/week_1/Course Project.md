@@ -87,7 +87,7 @@ Los cuatro graficos que necesitará construir se muestran a continuación.
 
 Grafico 1
 
-![Grafico 1](./Project/week_1/ExDataCP1Plot1.png)
+![Grafico 1](https://github.com/jtellez93/Data-Science/blob/master/4-Exploratory%20Data%20Analysis/Project/week_1/ExDataCP1Plot1.png)
 
 Grafico 2
 
