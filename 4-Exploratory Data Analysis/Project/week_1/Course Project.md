@@ -91,12 +91,15 @@ Grafico 1
 
 Grafico 2
 
+![Grafico 2](https://github.com/jtellez93/Data-Science/blob/master/4-Exploratory%20Data%20Analysis/Project/week_1/ExDataCP1Plot2.png)
 
 Grafico 3
 
+![Grafico 3](https://github.com/jtellez93/Data-Science/blob/master/4-Exploratory%20Data%20Analysis/Project/week_1/ExDataCP1Plot3.png)
 
 Grafico 4
 
+![Grafico 4](https://github.com/jtellez93/Data-Science/blob/master/4-Exploratory%20Data%20Analysis/Project/week_1/ExDataCP1Plot4.png)
 
 
 
