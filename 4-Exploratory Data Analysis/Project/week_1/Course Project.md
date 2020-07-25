@@ -1,12 +1,12 @@
 # Course Project 1
 
-Esta asignación utiliza datos del repositorio de aprendizaje automático de **UC Irvine**, un repositorio popular para conjuntos de datos de aprendizaje automático. En particular, utilizaremos el “Individual household electric power consumption Data Set” que he puesto a disposición en el sitio web del curso:
+Esta asignación utiliza datos del repositorio de [aprendizaje automático de UC Irvine](http://archive.ics.uci.edu/ml/index.php), un repositorio popular para conjuntos de datos de aprendizaje automático. En particular, utilizaremos el “Individual household electric power consumption Data Set” que he puesto a disposición en el sitio web del curso:
 
 * **Conjunto de datos:** consumo de energía eléctrica [20Mb]
 
 * **Descripción:** Mediciones del consumo de energía eléctrica en un hogar con una frecuencia de muestreo de un minuto durante un período de casi 4 años. Se encuentran disponibles diferentes cantidades eléctricas y algunos valores de submedición.
 
-Las siguientes descripciones de las 9 variables en el conjunto de datos se toman del sitio web de UCI:
+Las siguientes descripciones de las 9 variables en el conjunto de datos se toman del sitio web de [UCI](https://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption):
 
 1. **Fecha**: Fecha en formato dd / mm / aaaa
 2. **Hora**: hora en formato hh: mm: ss
