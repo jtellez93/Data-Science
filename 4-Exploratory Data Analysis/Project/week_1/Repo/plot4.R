@@ -1,7 +1,7 @@
 # Este escript realiza los siguientes pasos
-# 1. lee datos de household_power_consumption.txt 
+# 1. lee datos de household_power_consumption.txt
 # 2. toma el subconjunto de datos para las fechas 2007-02-01 y 2007-02-02
-# 3. Genera un diagrama de linea por hora y por dia para la variable Global_active_power
+# 3. Genera 4 graficos en 1, (GAP vs. time, Vol vs. time, submetering vs. time and GRP vs. time)
 
 
 # librerias necesarias
@@ -34,15 +34,20 @@ str(data)
 # subconjunto para las fechas 2007-02-01 y 2007-02-02
 subset.data <- data %>%
         filter(Date == "2007-02-01" | Date =="2007-02-02" ) 
-        
+
 
 # Histograma para la variable Global_active_power
 
-png("./Project/week_1/Repo/plot2.png", width=480, height=480)
+png("./Project/week_1/Repo/plot4.png", width=480, height=480)
 
-with(subset.data, plot(fulltime, Global_active_power, 
-                      type="l", 
-                      xlab="Day", 
-                      ylab="Global Active Power (kilowatts)"))
+par(mfrow=c(2,2))
+
+with(subset.data, plot(fulltime, Global_active_power, type="l", xlab="", ylab="Global Active Power"))
+with(subset.data, plot(fulltime, Voltage, type = "l", xlab="datetime", ylab="Voltage"))
+with(subset.data, plot(fulltime, Sub_metering_1, type="l", xlab="", ylab="Energy sub metering"))
+lines(subset.data$fulltime, subset.data$Sub_metering_2,type="l", col= "red")
+lines(subset.data$fulltime, subset.data$Sub_metering_3,type="l", col= "blue")
+legend(c("topright"), c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty= 1, lwd=2, col = c("black", "red", "blue"))
+with(subset.data, plot(fulltime, Global_reactive_power, type="l", xlab="datetime", ylab="Global_reactive_power"))
 
 dev.off()
