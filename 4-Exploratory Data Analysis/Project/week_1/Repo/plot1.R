@@ -10,7 +10,7 @@ library(dplyr)
 
 
 # leer datos 
-data <- read.table("./Project/week_1/Data/household_power_consumption.txt", stringsAsFactors = FALSE, header = TRUE, sep =";")
+data <- read.table("./Project/week_1/Data/household_power_consumption.txt", stringsAsFactors = F, header = TRUE, sep =";")
 names(data)
 str(data)
 
